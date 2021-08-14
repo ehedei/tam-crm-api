@@ -3,8 +3,10 @@ package com.theagilemonkeys.crmapi.services;
 import com.theagilemonkeys.crmapi.models.Customer;
 import com.theagilemonkeys.crmapi.repositories.ICustomerRepository;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CustomerService implements ICustomerService {
@@ -18,23 +20,39 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public Customer getCustomer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Customer getCustomerById(String id) {
+        return this.customerRepository.findById(id).orElse(null);
     }
 
     @Override
-    public void deleteCustomer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Transactional
+    public boolean deleteCustomerById(String id) {
+        Optional<Customer> customer = this.customerRepository.findById(id);
+        if (customer.isEmpty()) {
+            return false;
+        } else {
+            this.customerRepository.delete(customer.get());
+            return true;
+        }        
     }
 
     @Override
-    public void updateCustomer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Customer saveCustomer(Customer customer) {
+        return this.customerRepository.save(customer);
     }
-
+    
     @Override
-    public Customer createCustomer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Customer updateCustomer(Customer newCustomer, String id) {
+        Customer oldCustomer = this.customerRepository.findById(id).orElse(null);
+        
+        if (oldCustomer != null) {
+            newCustomer.setId(oldCustomer.getId());
+            newCustomer.setCreatedBy(oldCustomer.getCreatedBy());
+            oldCustomer = this.customerRepository.save(newCustomer);
+        }
+        
+        return oldCustomer;
     }
+    
     
 }

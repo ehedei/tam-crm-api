@@ -6,11 +6,12 @@ import java.util.List;
 public interface ICustomerService {
     public List<Customer> getCustomers();
     
-    public Customer getCustomer();
+    public Customer getCustomerById(String id);
     
-    public void deleteCustomer();
+    public boolean deleteCustomerById(String id);
     
-    public void updateCustomer();
+    public Customer saveCustomer(Customer customer);
     
-    public Customer createCustomer();
+    public Customer updateCustomer(Customer customer, String id);
+
 }
