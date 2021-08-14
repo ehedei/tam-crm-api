@@ -3,6 +3,7 @@ package com.theagilemonkeys.crmapi.controllers;
 import com.theagilemonkeys.crmapi.models.Customer;
 import com.theagilemonkeys.crmapi.services.ICustomerService;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,14 +40,14 @@ public class CustomerRestController {
     }
     
     @PostMapping(path="/customer", consumes="application/json")
-    public Customer saveCustomer(@RequestBody Customer customer) {
+    public Customer saveCustomer(@Valid @RequestBody Customer customer) {
         // customer.setCreatedBy(user); TODO Get User through Authorization and add to customer (createdBy)
         customer = this.customerService.saveCustomer(customer);
         return customer;
     }
     
     @PutMapping(path="/customer/{id}", consumes="application/json")
-    public Customer updateCustomer(@RequestBody Customer customer, @PathVariable String id) {
+    public Customer updateCustomer(@Valid @RequestBody Customer customer, @PathVariable String id) {
         // customer.setUpdatedBy(user); TODO Get User through Authorization and add to customer (updatedBy)
         customer = this.customerService.updateCustomer(customer, id);
         
