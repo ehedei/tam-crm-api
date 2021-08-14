@@ -4,6 +4,9 @@ import com.theagilemonkeys.crmapi.models.User;
 import com.theagilemonkeys.crmapi.repositories.IUserRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,8 +16,9 @@ public class UserService implements IUserService {
     private IUserRepository userRepository;
 
     @Override
-    public List<User> getUsers() {
-        return this.userRepository.findAll();
+    public List<User> getUsers(Integer page, Integer pageSize, String sortBy) {
+        Pageable pageable = PageRequest.of(page, pageSize, Sort.by(sortBy));
+        return this.userRepository.findAll(pageable).getContent();
     }
 
     @Override

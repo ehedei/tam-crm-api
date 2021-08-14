@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -24,8 +25,11 @@ public class CustomerRestController {
     private ICustomerService customerService;
     
     @GetMapping("/customer")
-    public List<Customer> getCustomers() {
-        return this.customerService.getCustomers();
+    public List<Customer> getCustomers(@RequestParam(defaultValue = "0") Integer page, 
+                                        @RequestParam(defaultValue = "10") Integer pageSize,
+                                        @RequestParam(defaultValue = "id") String sortBy) {
+        
+        return this.customerService.getCustomers(page, pageSize, sortBy);
     }
     
     @GetMapping("/customer/{id}")
