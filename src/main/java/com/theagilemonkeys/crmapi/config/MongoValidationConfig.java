@@ -1,4 +1,4 @@
-package com.theagilemonkeys.crmapi;
+package com.theagilemonkeys.crmapi.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

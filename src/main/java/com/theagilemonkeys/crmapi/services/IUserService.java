@@ -6,12 +6,12 @@ import java.util.List;
 public interface IUserService {
     public List<User> getUsers(Integer page, Integer pageSize, String sortBy);
     
-    public User getUser();
+    public User getUserById(String id);
     
-    public void deleteUser();
+    public void deleteUserById(String id);
     
-    public void updateUser();
+    public void updateUserById(String id, User user);
     
-    public User createUser();
+    public User createUser(User user);
     
 }
