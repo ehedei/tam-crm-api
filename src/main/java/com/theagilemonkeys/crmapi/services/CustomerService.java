@@ -30,7 +30,7 @@ public class CustomerService implements ICustomerService {
     public Customer getCustomerById(String id) {
         return this.customerRepository
                 .findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found", null));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found"));
     }
 
     @Override
@@ -38,7 +38,7 @@ public class CustomerService implements ICustomerService {
     public void deleteCustomerById(String id) {
         Customer customer = this.customerRepository
                 .findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found", null));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found"));
 
         this.customerRepository.delete(customer);
 
@@ -56,7 +56,7 @@ public class CustomerService implements ICustomerService {
         
         Customer oldCustomer = this.customerRepository
                 .findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found", null));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found"));
 
         newCustomer.setId(oldCustomer.getId());
         newCustomer.setCreatedBy(oldCustomer.getCreatedBy());
