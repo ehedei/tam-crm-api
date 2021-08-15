@@ -9,12 +9,16 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.theagilemonkeys.crmapi.repositories.IUserEntityRepository;
 import java.util.Optional;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Service
 public class UserEntltyService implements IUserEntityService {
     
     @Autowired
     private IUserEntityRepository userRepository;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<UserEntity> getUsers(Integer page, Integer pageSize, String sortBy) {
@@ -24,7 +28,7 @@ public class UserEntltyService implements IUserEntityService {
 
     @Override
     public UserEntity getUserById(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.userRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -39,7 +43,9 @@ public class UserEntltyService implements IUserEntityService {
 
     @Override
     public UserEntity createUser(UserEntity user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        user.setPassword(this.passwordEncoder.encode(user.getPassword()));       
+        user = this.userRepository.save(user);
+        return user;
     }
 
     @Override

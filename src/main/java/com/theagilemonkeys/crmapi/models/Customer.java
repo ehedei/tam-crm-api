@@ -1,5 +1,6 @@
 package com.theagilemonkeys.crmapi.models;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -8,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "customers")
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Customer {
     @Id
     private String id;

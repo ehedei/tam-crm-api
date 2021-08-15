@@ -33,41 +33,26 @@ public class CustomerRestController {
     }
     
     @GetMapping("/customer/{id}")
-    public Customer getCustomers(@PathVariable String id) {
-        Customer customer = this.customerService.getCustomerById(id);
-        
-        if(customer == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found", null);
-        } else {
-            return customer;
-        }
+    public Customer getCustomer(@PathVariable String id) {
+        return this.customerService.getCustomerById(id);
     }
     
     @PostMapping(path="/customer", consumes="application/json")
     public Customer saveCustomer(@Valid @RequestBody Customer customer) {
         // customer.setCreatedBy(user); TODO Get User through Authorization and add to customer (createdBy)
-        customer = this.customerService.saveCustomer(customer);
-        return customer;
+        return this.customerService.saveCustomer(customer);
+        
     }
     
     @PutMapping(path="/customer/{id}", consumes="application/json")
     public Customer updateCustomer(@Valid @RequestBody Customer customer, @PathVariable String id) {
         // customer.setUpdatedBy(user); TODO Get User through Authorization and add to customer (updatedBy)
-        customer = this.customerService.updateCustomer(customer, id);
-        
-        if(customer != null) {
-            return customer;
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found", null);
-        }
-        
+        return this.customerService.updateCustomer(customer, id);        
     }
     
     @DeleteMapping("/customer/{id}")
     public void deleteCustomer(@PathVariable String id) {
-        if(!this.customerService.deleteCustomerById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found", null);
-        }
+        this.customerService.deleteCustomerById(id);
     }
     
 }

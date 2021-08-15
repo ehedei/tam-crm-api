@@ -3,9 +3,7 @@ package com.theagilemonkeys.crmapi.controllers;
 
 import com.theagilemonkeys.crmapi.models.UserEntity;
 import java.util.List;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.theagilemonkeys.crmapi.services.IUserEntityService;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("api")
@@ -21,15 +20,14 @@ public class UserRestController {
     @Autowired
     private IUserEntityService userService;
     
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    
     @GetMapping("/user")
     public List<UserEntity> getUsers(@RequestParam(defaultValue = "0") Integer page, 
                                         @RequestParam(defaultValue = "10") Integer pageSize,
                                         @RequestParam(defaultValue = "username") String sortBy) {
         
-        return this.userService.getUsers(page, pageSize, sortBy);
+        List<UserEntity> list = this.userService.getUsers(page, pageSize, sortBy);
+        
+        return list;
     }
     
     @GetMapping("/user/{id}")
@@ -38,9 +36,7 @@ public class UserRestController {
     }
     
     @PostMapping("/user")
-    public UserEntity createUser(@Valid @RequestParam UserEntity user) {
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
+    public UserEntity createUser(@RequestBody UserEntity user) {
         return this.userService.createUser(user);
     }
 }

@@ -8,7 +8,7 @@ public interface ICustomerService {
     
     public Customer getCustomerById(String id);
     
-    public boolean deleteCustomerById(String id);
+    public void deleteCustomerById(String id);
     
     public Customer saveCustomer(Customer customer);
     

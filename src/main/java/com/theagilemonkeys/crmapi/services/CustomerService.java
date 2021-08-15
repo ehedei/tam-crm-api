@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class CustomerService implements ICustomerService {
-    
+
     @Autowired
     private ICustomerRepository customerRepository;
 
@@ -25,38 +27,37 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public Customer getCustomerById(String id) {
-        return this.customerRepository.findById(id).orElse(null);
+        return this.customerRepository
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found", null));
     }
 
     @Override
     @Transactional
-    public boolean deleteCustomerById(String id) {
-        Optional<Customer> customer = this.customerRepository.findById(id);
-        if (customer.isEmpty()) {
-            return false;
-        } else {
-            this.customerRepository.delete(customer.get());
-            return true;
-        }        
+    public void deleteCustomerById(String id) {
+        Customer customer = this.customerRepository
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found", null));
+
+        this.customerRepository.delete(customer);
+
     }
 
     @Override
     public Customer saveCustomer(Customer customer) {
         return this.customerRepository.save(customer);
     }
-    
+
     @Override
     public Customer updateCustomer(Customer newCustomer, String id) {
-        Customer oldCustomer = this.customerRepository.findById(id).orElse(null);
-        
-        if (oldCustomer != null) {
-            newCustomer.setId(oldCustomer.getId());
-            newCustomer.setCreatedBy(oldCustomer.getCreatedBy());
-            oldCustomer = this.customerRepository.save(newCustomer);
-        }
-        
+        Customer oldCustomer = this.customerRepository
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found", null));
+
+        newCustomer.setId(oldCustomer.getId());
+        newCustomer.setCreatedBy(oldCustomer.getCreatedBy());
+
         return oldCustomer;
     }
-    
-    
+
 }
