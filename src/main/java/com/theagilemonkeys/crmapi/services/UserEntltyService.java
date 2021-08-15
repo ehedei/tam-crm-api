@@ -9,7 +9,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.theagilemonkeys.crmapi.repositories.IUserEntityRepository;
 import java.util.Optional;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class UserEntltyService implements IUserEntityService {
@@ -28,17 +30,32 @@ public class UserEntltyService implements IUserEntityService {
 
     @Override
     public UserEntity getUserById(String id) {
-        return this.userRepository.findById(id).orElse(null);
+        return this.userRepository
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
     }
 
+    // TODO Cascade
     @Override
     public void deleteUserById(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        UserEntity user = this.userRepository
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        
+        this.userRepository.delete(user);
     }
 
     @Override
-    public void updateUserById(String id, UserEntity user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public UserEntity updateUserById(String id, UserEntity user) {
+        UserEntity oldUser = this.userRepository
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+                
+        String newPassword = (user.getPassword() == null) ? oldUser.getPassword() : this.passwordEncoder.encode(user.getPassword());
+        
+        user.setPassword(newPassword);
+        user.setId(oldUser.getId());
+        return this.userRepository.save(user);
     }
 
     @Override

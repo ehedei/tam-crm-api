@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.theagilemonkeys.crmapi.services.IUserEntityService;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
@@ -25,9 +27,7 @@ public class UserRestController {
                                         @RequestParam(defaultValue = "10") Integer pageSize,
                                         @RequestParam(defaultValue = "username") String sortBy) {
         
-        List<UserEntity> list = this.userService.getUsers(page, pageSize, sortBy);
-        
-        return list;
+        return this.userService.getUsers(page, pageSize, sortBy);
     }
     
     @GetMapping("/user/{id}")
@@ -38,5 +38,15 @@ public class UserRestController {
     @PostMapping("/user")
     public UserEntity createUser(@RequestBody UserEntity user) {
         return this.userService.createUser(user);
+    }
+    
+    @PutMapping("/user/{id}")
+    public UserEntity updateUser(@PathVariable String id, @RequestBody UserEntity user) {
+        return this.userService.updateUserById(id, user);
+    }
+    
+    @DeleteMapping("/user/{id}")
+    public void deleteUser(@PathVariable String id) {
+        this.userService.deleteUserById(id);
     }
 }

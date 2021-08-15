@@ -13,7 +13,7 @@ public interface IUserEntityService {
     
     public void deleteUserById(String id);
     
-    public void updateUserById(String id, UserEntity user);
+    public UserEntity updateUserById(String id, UserEntity user);
     
     public UserEntity createUser(UserEntity user);
 }
