@@ -1,28 +1,29 @@
 package com.theagilemonkeys.crmapi.services;
 
-import com.theagilemonkeys.crmapi.models.User;
-import com.theagilemonkeys.crmapi.repositories.IUserRepository;
+import com.theagilemonkeys.crmapi.models.UserEntity;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import com.theagilemonkeys.crmapi.repositories.IUserEntityRepository;
+import java.util.Optional;
 
 @Service
-public class UserService implements IUserService {
+public class UserEntltyService implements IUserEntityService {
     
     @Autowired
-    private IUserRepository userRepository;
+    private IUserEntityRepository userRepository;
 
     @Override
-    public List<User> getUsers(Integer page, Integer pageSize, String sortBy) {
+    public List<UserEntity> getUsers(Integer page, Integer pageSize, String sortBy) {
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by(sortBy));
         return this.userRepository.findAll(pageable).getContent();
     }
 
     @Override
-    public User getUserById(String id) {
+    public UserEntity getUserById(String id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -32,13 +33,17 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void updateUserById(String id, User user) {
+    public void updateUserById(String id, UserEntity user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public User createUser(User user) {
+    public UserEntity createUser(UserEntity user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    @Override
+    public Optional<UserEntity> getUserByUsername(String username) {
+        return this.userRepository.findByUsername(username);
+    }
 }

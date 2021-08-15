@@ -21,8 +21,8 @@ public class Customer {
     private String photoSrc;
     
     @DBRef
-    private User createdBy;
+    private UserEntity createdBy;
     
     @DBRef
-    private User updatedBy;
+    private UserEntity updatedBy;
 }

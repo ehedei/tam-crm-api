@@ -1,4 +1,4 @@
-package com.theagilemonkeys.crmapi.security;
+package com.theagilemonkeys.crmapi.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -6,15 +6,18 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-public class WebSecurity extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Autowired
     private PasswordEncoder passwordEncoder;
     
-    // A donde se puede acceder
+    @Autowired
+    private UserDetailsService userDetailsService;
+    
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
@@ -27,7 +30,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .authenticated();        
     }
         
-    // Qué usuario puede acceder
+
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {   
         auth
@@ -35,5 +38,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .withUser("ehedei")
                 .password(this.passwordEncoder.encode("123456"))
                 .roles("USER", "ADMIN");
+        
+        auth.userDetailsService(this.userDetailsService).passwordEncoder(this.passwordEncoder);
     }
 }
