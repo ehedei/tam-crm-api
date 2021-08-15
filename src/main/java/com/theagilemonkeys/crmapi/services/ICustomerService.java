@@ -1,6 +1,7 @@
 package com.theagilemonkeys.crmapi.services;
 
 import com.theagilemonkeys.crmapi.models.Customer;
+import java.security.Principal;
 import java.util.List;
 
 public interface ICustomerService {
@@ -10,8 +11,8 @@ public interface ICustomerService {
     
     public void deleteCustomerById(String id);
     
-    public Customer saveCustomer(Customer customer);
+    public Customer saveCustomer(Customer customer, Principal principal);
     
-    public Customer updateCustomer(Customer customer, String id);
+    public Customer updateCustomer(String id, Customer customer, Principal principal);
 
 }
