@@ -3,7 +3,6 @@ package com.theagilemonkeys.crmapi.services;
 import com.theagilemonkeys.crmapi.models.Customer;
 import com.theagilemonkeys.crmapi.models.UserEntity;
 import com.theagilemonkeys.crmapi.repositories.ICustomerRepository;
-import java.security.Principal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -45,22 +44,20 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public Customer saveCustomer(Customer customer, Principal principal) {
-        customer.setCreatedBy((UserEntity) principal);        
+    public Customer saveCustomer(Customer customer, UserEntity user) {
+        customer.setCreatedBy(user);        
         return this.customerRepository.save(customer);
     }
 
     @Override
-    public Customer updateCustomer(String id, Customer newCustomer, Principal principal) {
-        UserEntity updatedBy = (UserEntity) principal;
-        
+    public Customer updateCustomer(String id, Customer newCustomer, UserEntity user) {
         Customer oldCustomer = this.customerRepository
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found"));
 
         newCustomer.setId(oldCustomer.getId());
         newCustomer.setCreatedBy(oldCustomer.getCreatedBy());
-        newCustomer.setUpdatedBy(updatedBy);
+        newCustomer.setUpdatedBy(user);
         
         return this.customerRepository.save(newCustomer);
     }
