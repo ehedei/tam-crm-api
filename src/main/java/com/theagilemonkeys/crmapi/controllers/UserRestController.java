@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.theagilemonkeys.crmapi.services.IUserEntityService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,8 +38,8 @@ public class UserRestController {
     }
     
     @PostMapping("/user")
-    public UserEntity createUser(@RequestBody UserEntity user) {
-        return this.userService.createUser(user);
+    public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity user) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.userService.createUser(user));
     }
     
     @PutMapping("/user/{id}")

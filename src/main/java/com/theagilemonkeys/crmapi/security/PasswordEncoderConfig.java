@@ -1,4 +1,4 @@
-package com.theagilemonkeys.crmapi.config.security;
+package com.theagilemonkeys.crmapi.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

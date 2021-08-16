@@ -7,6 +7,7 @@ import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,9 +40,8 @@ public class CustomerRestController {
     }
     
     @PostMapping(path="/customer", consumes="application/json")
-    public Customer saveCustomer(@Valid @RequestBody Customer customer, Principal principal) {
-        return this.customerService.saveCustomer(customer, principal);
-        
+    public ResponseEntity<Customer> saveCustomer(@Valid @RequestBody Customer customer, Principal principal) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.customerService.saveCustomer(customer, principal));
     }
     
     @PutMapping(path="/customer/{id}", consumes="application/json")
