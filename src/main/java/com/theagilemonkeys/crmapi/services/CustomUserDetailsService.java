@@ -18,4 +18,8 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .getUserByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username));
     }
+    
+    public UserDetails loadUserById(String id) {
+        return this.userEntityService.getUserById(id);
+    }
 }

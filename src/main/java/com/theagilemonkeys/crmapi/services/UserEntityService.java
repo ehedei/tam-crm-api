@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
-public class UserEntltyService implements IUserEntityService {
+public class UserEntityService implements IUserEntityService {
     
     @Autowired
     private IUserEntityRepository userRepository;
