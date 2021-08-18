@@ -81,7 +81,7 @@ All these endpoints are preceeded by `/user`.
 |GET|**/:id** |Get an User by id|Admin|-|-|User|
 |POST|**/**|Register a new User in the App|Admin|**username**, **email**, **password**, roles, enabled, accountNonExpired, accountNonLocked, credentialsNonExpired |-|User created||
 |PUT|**/:id**|Update an User by id|Admin|**username**, **email**, password, **roles**, enabled, accountNonExpired, accountNonLocked, credentialsNonExpired |-|User updated|
-|DELETE|**/:id** |Delete an User by id|Admin|-|-|Deleted User|
+|DELETE|**/:id** |Delete an User by id|Admin|-|-|-|
 
 
 ##
