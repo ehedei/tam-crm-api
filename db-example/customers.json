@@ -1,0 +1,71 @@
+[{
+  "_id": {
+    "$oid": "611d01783844fe5367d8ee5b"
+  },
+  "name": "Customer",
+  "surname": "uno",
+  "photoSrc": "https://d1bvpoagx8hqbg.cloudfront.net/259/4e2f2a39807a86857f560d8b3d3de377.jpg",
+  "createdBy": {
+    "$ref": "users",
+    "$id": {
+      "$oid": "611972c499c02f2d072227b5"
+    }
+  },
+  "_class": "com.theagilemonkeys.crmapi.models.Customer"
+},{
+  "_id": {
+    "$oid": "611d01d097337c75c3d204e9"
+  },
+  "name": "Customer",
+  "surname": "dos",
+  "photoSrc": "https://d1bvpoagx8hqbg.cloudfront.net/259/4e2f2a39807a86857f560d8b3d3de377.jpg",
+  "createdBy": {
+    "$ref": "users",
+    "$id": {
+      "$oid": "611972f699c02f2d072227b6"
+    }
+  },
+  "_class": "com.theagilemonkeys.crmapi.models.Customer"
+},{
+  "_id": {
+    "$oid": "6120c6bf843a3748857165aa"
+  },
+  "name": "Customer",
+  "surname": "tres",
+  "photoSrc": "https://d1bvpoagx8hqbg.cloudfront.net/259/4e2f2a39807a86857f560d8b3d3de377.jpg",
+  "createdBy": {
+    "$ref": "users",
+    "$id": {
+      "$oid": "611972c499c02f2d072227b5"
+    }
+  },
+  "_class": "com.theagilemonkeys.crmapi.models.Customer"
+},{
+  "_id": {
+    "$oid": "6120c6c6843a3748857165ab"
+  },
+  "name": "Customer",
+  "surname": "cuatro",
+  "photoSrc": "https://d1bvpoagx8hqbg.cloudfront.net/259/4e2f2a39807a86857f560d8b3d3de377.jpg",
+  "createdBy": {
+    "$ref": "users",
+    "$id": {
+      "$oid": "611972c499c02f2d072227b5"
+    }
+  },
+  "_class": "com.theagilemonkeys.crmapi.models.Customer"
+},{
+  "_id": {
+    "$oid": "6120c6d0843a3748857165ac"
+  },
+  "name": "Customer",
+  "surname": "cinco",
+  "photoSrc": "https://d1bvpoagx8hqbg.cloudfront.net/259/4e2f2a39807a86857f560d8b3d3de377.jpg",
+  "createdBy": {
+    "$ref": "users",
+    "$id": {
+      "$oid": "611972c499c02f2d072227b5"
+    }
+  },
+  "_class": "com.theagilemonkeys.crmapi.models.Customer"
+}]

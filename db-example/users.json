@@ -1,0 +1,79 @@
+[{
+  "_id": {
+    "$oid": "611972c499c02f2d072227b5"
+  },
+  "username": "ehedei",
+  "email": "ehedei@utime.com",
+  "password": "$2a$10$JUvVh9yQ/9wbnaUrxB.nleAmyEAg.TMrK32z7vY/7t.ZeAR1d/xKa",
+  "roles": [
+    "ROLE_ADMIN",
+    "ROLE_USER"
+  ],
+  "enabled": true,
+  "accountNonExpired": true,
+  "accountNonLocked": true,
+  "credentialsNonExpired": true,
+  "_class": "com.theagilemonkeys.crmapi.models.UserEntity"
+},{
+  "_id": {
+    "$oid": "6120c669843a3748857165a6"
+  },
+  "username": "martino",
+  "email": "martino@utime.com",
+  "password": "$2a$10$Q6hl.bcs.GENOmSIxse5EuyW/0rdKnx47v1scIIMezVEVDxDTifOy",
+  "roles": [
+    "ROLE_ADMIN",
+    "ROLE_USER"
+  ],
+  "enabled": true,
+  "accountNonExpired": true,
+  "accountNonLocked": true,
+  "credentialsNonExpired": true,
+  "_class": "com.theagilemonkeys.crmapi.models.UserEntity"
+},{
+  "_id": {
+    "$oid": "6120c685843a3748857165a7"
+  },
+  "username": "admin",
+  "email": "admin@tam.com",
+  "password": "$2a$10$6sdayDteF1eaMyAfn9cl5eZLPLW0JhjCqnthmhzRPHAANMjDhfazi",
+  "roles": [
+    "ROLE_ADMIN",
+    "ROLE_USER"
+  ],
+  "enabled": true,
+  "accountNonExpired": true,
+  "accountNonLocked": true,
+  "credentialsNonExpired": true,
+  "_class": "com.theagilemonkeys.crmapi.models.UserEntity"
+},{
+  "_id": {
+    "$oid": "6120c697843a3748857165a8"
+  },
+  "username": "sabrina",
+  "email": "sabrina@tam.com",
+  "password": "$2a$10$wHUT4kctHwRst0BM1K2qEunrtPS8kjUvMicjdNQOpN3XBmE5AwLq2",
+  "roles": [
+    "ROLE_USER"
+  ],
+  "enabled": true,
+  "accountNonExpired": true,
+  "accountNonLocked": true,
+  "credentialsNonExpired": true,
+  "_class": "com.theagilemonkeys.crmapi.models.UserEntity"
+},{
+  "_id": {
+    "$oid": "6120c6a5843a3748857165a9"
+  },
+  "username": "goretti",
+  "email": "gortti@tam.com",
+  "password": "$2a$10$51XVT8TX9clvGJ.B4/CxZ.SmeoKPnagL5OyUAIF6WedA.iOdLDDHO",
+  "roles": [
+    "ROLE_USER"
+  ],
+  "enabled": true,
+  "accountNonExpired": true,
+  "accountNonLocked": true,
+  "credentialsNonExpired": true,
+  "_class": "com.theagilemonkeys.crmapi.models.UserEntity"
+}]
